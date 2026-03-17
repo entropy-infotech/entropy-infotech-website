@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /client/
+Disallow: /student-auth/
+
+Sitemap: https://entropyinfotech.com/sitemap.xml
