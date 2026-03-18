@@ -72,7 +72,7 @@ import { environment } from '../../../environments/environment';
             </div>
 
             <div class="flex gap-4">
-              <a [href]="'http://localhost:5000/' + app.resumeFile" target="_blank"
+              <a [href]="backendBaseUrl + '/' + app.resumeFile" target="_blank"
                 class="flex-1 bg-slate-800 hover:bg-slate-700 text-white py-2 rounded-lg text-center text-sm font-semibold transition-colors">
                 View Resume
               </a>
@@ -94,6 +94,7 @@ export class ManageApplicationsComponent implements OnInit {
   
   apps: any[] = [];
   loading = true;
+  readonly backendBaseUrl = environment.apiUrl.replace('/api', '');
   private apiUrl = `${environment.apiUrl}/careers/admin/applications`;
 
   ngOnInit() {

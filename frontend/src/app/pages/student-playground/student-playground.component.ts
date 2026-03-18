@@ -6,6 +6,7 @@ import { PlaygroundService, Quiz, Activity, LeaderboardEntry } from '../../servi
 import { HttpClientModule } from '@angular/common/http';
 import { StudentAuthService } from '../../services/student-auth.service';
 import { RouterLink } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 interface ChatMessage {
   sender: string;
@@ -55,7 +56,8 @@ export class StudentPlaygroundComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.socket = io('http://localhost:5000'); // connecting to backend server
+    const socketUrl = environment.apiUrl.replace('/api', ''); // derive base URL from environment
+    this.socket = io(socketUrl); // connecting to backend server
 
     this.socket.on('chat_message', (data: ChatMessage) => {
       this.messages.push(data);

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface Quiz {
   _id?: string;
@@ -33,7 +34,7 @@ export interface LeaderboardEntry {
   providedIn: 'root'
 })
 export class PlaygroundService {
-  private apiUrl = 'http://localhost:5000/api/playground';
+  private apiUrl = `${environment.apiUrl}/playground`;
 
   constructor(private http: HttpClient) {}
 
