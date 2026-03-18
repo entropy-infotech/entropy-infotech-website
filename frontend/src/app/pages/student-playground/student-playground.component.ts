@@ -57,7 +57,9 @@ export class StudentPlaygroundComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const socketUrl = environment.apiUrl.replace('/api', ''); // derive base URL from environment
-    this.socket = io(socketUrl); // connecting to backend server
+    this.socket = io(socketUrl, {
+      withCredentials: true
+    }); // connecting to backend server
 
     this.socket.on('chat_message', (data: ChatMessage) => {
       this.messages.push(data);
