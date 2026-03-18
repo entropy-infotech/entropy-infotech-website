@@ -27,7 +27,7 @@ Thumbs.db
 *.swo
 
 # Project specific
-backend/createAdmin.js
+backend/scripts/
 *.log
 npm-debug.log*
 tmp/
