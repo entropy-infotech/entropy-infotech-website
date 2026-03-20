@@ -22,7 +22,7 @@ const server = http.createServer(app);
 
 // Middleware
 const allowedOrigins = [
-  process.env.FRONTEND_URL || "http://localhost:4200",
+  process.env.FRONTEND_URL || "http://localhost:4200", "https://entropy-infotech-website.vercel.app"
 ];
 
 app.use(
