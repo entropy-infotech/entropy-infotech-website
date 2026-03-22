@@ -162,10 +162,10 @@ import { delay, map } from 'rxjs/operators';
 
               <button
                 type="submit"
-                [disabled]="contactForm.invalid || isSubmitting"
+                [disabled]="!contactForm.valid || isSubmitting"
                 class="w-full bg-blue-600 hover:bg-blue-700 text-white p-5 rounded-2xl font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] shadow-xl shadow-blue-500/20"
               >
-                {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+                {{ isSubmitting ? 'Sending...' : (contactForm.pending ? 'Verifying...' : 'Send Message') }}
               </button>
 
               <div
@@ -231,7 +231,7 @@ export class ContactComponent {
       delay(1000), // Simulate API delay
       map(() => {
         // Just for demo - any email with "taken" fails
-        if (control.value.includes('taken')) {
+        if (control.value && typeof control.value === 'string' && control.value.includes('taken')) {
           return { taken: true };
         }
         return null;

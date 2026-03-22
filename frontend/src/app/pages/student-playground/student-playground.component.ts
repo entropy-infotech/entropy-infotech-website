@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { io, Socket } from 'socket.io-client';
+import { Title, Meta } from '@angular/platform-browser';
 import { PlaygroundService, Quiz, Activity, LeaderboardEntry } from '../../services/playground.service';
 import { HttpClientModule } from '@angular/common/http';
 import { StudentAuthService } from '../../services/student-auth.service';
@@ -22,6 +23,10 @@ interface ChatMessage {
   styleUrl: './student-playground.component.css'
 })
 export class StudentPlaygroundComponent implements OnInit, OnDestroy {
+  @ViewChild('chatContainer') private chatContainer!: ElementRef;
+  private isNearBottom: boolean = true;
+  isMobileMenuOpen: boolean = false;
+
   visitorName: string = '';
   isJoined: boolean = false;
   newMessage: string = '';
@@ -38,13 +43,16 @@ export class StudentPlaygroundComponent implements OnInit, OnDestroy {
   quizQuestions: any[] = [];
   currentQuestionIndex: number = 0;
   score: number = 0;
+  currentRound: number = 1;
   isQuizLoading: boolean = false;
   isQuizCompleted: boolean = false;
   onlineUserCount: number = 0;
 
   constructor(
     private playgroundService: PlaygroundService,
-    public authService: StudentAuthService
+    public authService: StudentAuthService,
+    private titleService: Title,
+    private metaService: Meta
   ) {}
 
   get isLoggedIn(): boolean {
@@ -56,6 +64,10 @@ export class StudentPlaygroundComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('Entropy Infotech | Student Playground');
+    this.metaService.updateTag({ name: 'description', content: 'Join the world\'s biggest digital playground for tech students. Compete in AI challenges, chat with peers globally, and climb the leaderboard.' });
+    this.metaService.updateTag({ name: 'keywords', content: 'Student Playground, Entropy Infotech, Tech Quizzes, AI Challenges, Global Tech Students' });
+
     const socketUrl = environment.apiUrl.replace('/api', ''); // derive base URL from environment
     this.socket = io(socketUrl, {
       withCredentials: true
@@ -63,6 +75,11 @@ export class StudentPlaygroundComponent implements OnInit, OnDestroy {
 
     this.socket.on('chat_message', (data: ChatMessage) => {
       this.messages.push(data);
+      setTimeout(() => {
+        if (this.isNearBottom) {
+          this.scrollToBottom();
+        }
+      }, 50);
     });
 
     this.socket.on('user_count_update', (count: number) => {
@@ -107,7 +124,22 @@ export class StudentPlaygroundComponent implements OnInit, OnDestroy {
       };
       this.socket.emit('chat_message', msg);
       this.newMessage = '';
+      this.isNearBottom = true;
     }
+  }
+
+  onChatScroll() {
+    if (!this.chatContainer) return;
+    const element = this.chatContainer.nativeElement;
+    this.isNearBottom = element.scrollHeight - element.scrollTop - element.clientHeight < 50;
+  }
+
+  scrollToBottom() {
+    try {
+      if (this.chatContainer) {
+        this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
+      }
+    } catch(err) { }
   }
 
   startQuiz(quiz: Quiz) {
@@ -121,8 +153,9 @@ export class StudentPlaygroundComponent implements OnInit, OnDestroy {
     this.isQuizCompleted = false;
     this.currentQuestionIndex = 0;
     this.score = 0;
+    this.currentRound = 1;
 
-    this.playgroundService.getAIQuestions(quiz.name).subscribe({
+    this.playgroundService.getAIQuestions(quiz.name, this.currentRound).subscribe({
       next: (questions) => {
         this.quizQuestions = questions;
         this.isQuizLoading = false;
@@ -157,6 +190,27 @@ export class StudentPlaygroundComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         console.error('Submission error:', err);
+      }
+    });
+  }
+
+  nextRound() {
+    this.currentRound++;
+    this.isQuizCompleted = false;
+    this.isQuizLoading = true;
+    this.currentQuestionIndex = 0;
+    this.score = 0;
+
+    this.playgroundService.getAIQuestions(this.activeQuiz!.name, this.currentRound).subscribe({
+      next: (questions) => {
+        this.quizQuestions = questions;
+        this.isQuizLoading = false;
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Failed to load Round ' + this.currentRound + ' questions. Please try again later.');
+        this.isQuizLoading = false;
+        this.activeQuiz = null;
       }
     });
   }

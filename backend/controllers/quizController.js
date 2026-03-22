@@ -39,12 +39,54 @@ const DEFAULT_QUESTIONS = {
     { "question": "What command is used to run a Flutter app?", "options": ["flutter start", "flutter build", "flutter run", "flutter launch"], "correctAnswer": 2 },
     { "question": "Which widget is used for creating a scrollable list?", "options": ["Column", "ListView", "Stack", "Container"], "correctAnswer": 1 },
     { "question": "In Flutter, everything is a...?", "options": ["Object", "Function", "Widget", "Class"], "correctAnswer": 2 }
+  ],
+  "C++": [
+    { "question": "Who created C++?", "options": ["Bjarne Stroustrup", "Dennis Ritchie", "James Gosling", "Guido van Rossum"], "correctAnswer": 0 },
+    { "question": "Which of the following is correct to include an iostream standard header?", "options": ["#include <iostream>", "#include <iostream.h>", "#include iostream", "import iostream"], "correctAnswer": 0 },
+    { "question": "Which operator is used for dynamic memory allocation in C++?", "options": ["malloc", "alloc", "new", "create"], "correctAnswer": 2 },
+    { "question": "What is the size of an int data type in C++ (typically on 32/64 bit systems)?", "options": ["2 Bytes", "4 Bytes", "8 Bytes", "Depends on compiler"], "correctAnswer": 3 },
+    { "question": "Which feature of OOP is demonstrated by function overloading?", "options": ["Encapsulation", "Inheritance", "Polymorphism", "Abstraction"], "correctAnswer": 2 }
+  ],
+  "Java": [
+    { "question": "Which company developed Java?", "options": ["Microsoft", "Sun Microsystems", "Apple", "IBM"], "correctAnswer": 1 },
+    { "question": "What is the entry point of a Java program?", "options": ["main()", "start()", "init()", "run()"], "correctAnswer": 0 },
+    { "question": "Which keyword is used to inherit a class in Java?", "options": ["implements", "extends", "inherits", "super"], "correctAnswer": 1 },
+    { "question": "What is JVM?", "options": ["Java Virtual Machine", "Java Variable Matcher", "Java Version Manager", "Java Visual Monitor"], "correctAnswer": 0 },
+    { "question": "Which of these cannot be used for a variable name in Java?", "options": ["identifier", "keyword", "volatile", "String"], "correctAnswer": 1 }
+  ],
+  "Data Structures": [
+    { "question": "Which data structure uses LIFO?", "options": ["Queue", "Stack", "Tree", "Array"], "correctAnswer": 1 },
+    { "question": "What is the time complexity of searching in a balanced BST?", "options": ["O(1)", "O(n)", "O(log n)", "O(n^2)"], "correctAnswer": 2 },
+    { "question": "Which data structure is used for BFS?", "options": ["Stack", "Queue", "Heaps", "Hash Table"], "correctAnswer": 1 },
+    { "question": "What sorting algorithm uses divide and conquer?", "options": ["Bubble Sort", "Merge Sort", "Insertion Sort", "Selection Sort"], "correctAnswer": 1 },
+    { "question": "A graph with no cycles is called a...", "options": ["Tree", "Cyclic Graph", "Directed Graph", "Bipartite Graph"], "correctAnswer": 0 }
+  ],
+  "Git": [
+    { "question": "Which command is used to initialize a new Git repository?", "options": ["git start", "git init", "git create", "git new"], "correctAnswer": 1 },
+    { "question": "How do you check the status of your files in Git?", "options": ["git check", "git info", "git log", "git status"], "correctAnswer": 3 },
+    { "question": "Which command is used to create a new branch?", "options": ["git branch <name>", "git add branch", "git create <name>", "git checkout branch"], "correctAnswer": 0 },
+    { "question": "How do you save your changes locally?", "options": ["git push", "git save", "git commit", "git merge"], "correctAnswer": 2 },
+    { "question": "What does 'git clone' do?", "options": ["Copies a repository", "Deletes a branch", "Merges branches", "Stashes changes"], "correctAnswer": 0 }
+  ],
+  "Machine Learning": [
+    { "question": "Which algorithm is commonly used for classification?", "options": ["Linear Regression", "Logistic Regression", "K-Means", "PCA"], "correctAnswer": 1 },
+    { "question": "What does CNN stand for?", "options": ["Computer Neural Network", "Convolutional Neural Network", "Central Neural Network", "Calculated Neural Node"], "correctAnswer": 1 },
+    { "question": "Which technique is used to prevent overfitting?", "options": ["Boosting", "Bagging", "Regularization", "All of the above"], "correctAnswer": 3 },
+    { "question": "What is an epoch in ML?", "options": ["One forward pass", "One backward pass", "One full pass of training dataset", "A single prediction"], "correctAnswer": 2 },
+    { "question": "Which is an example of Unsupervised Learning?", "options": ["Spam Detection", "House Price Prediction", "Customer Segmentation", "Self-driving cars"], "correctAnswer": 2 }
   ]
 };
 
 exports.getAIQuestions = async (req, res) => {
   const { category } = req.params;
+  const round = parseInt(req.query.round) || 1;
+  
+  let difficultyContext = "standard difficulty for beginners";
+  if (round === 2) difficultyContext = "advanced difficulty (harder than round 1)";
+  if (round >= 3) difficultyContext = "expert or legendary difficulty (extremely hard)";
+
   const prompt = `Generate 5 multiple-choice questions about ${category}. 
+  The difficulty level should be ${difficultyContext}.
   Return ONLY a JSON array of objects with the following structure:
   [
     {

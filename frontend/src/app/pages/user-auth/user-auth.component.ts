@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
@@ -103,7 +103,7 @@ import { StudentAuthService } from '../../services/student-auth.service';
     input::placeholder { color: rgba(255, 255, 255, 0.2); }
   `]
 })
-export class UserAuthComponent {
+export class UserAuthComponent implements OnInit {
   private fb = inject(FormBuilder);
   private studentAuthService = inject(StudentAuthService);
   private router = inject(Router);
@@ -112,6 +112,16 @@ export class UserAuthComponent {
   isLogin = true;
   loading = false;
   error = '';
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['mode'] === 'register') {
+        this.isLogin = false;
+      } else {
+        this.isLogin = true;
+      }
+    });
+  }
 
   authForm = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(3)]],

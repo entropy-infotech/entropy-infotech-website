@@ -58,8 +58,8 @@ export class PlaygroundService {
     return this.http.post(`${this.apiUrl}/seed`, {});
   }
 
-  getAIQuestions(category: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/quiz/questions/${category}`);
+  getAIQuestions(category: string, round: number = 1): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/quiz/questions/${category}?round=${round}`);
   }
 
   submitQuizResult(score: number): Observable<any> {

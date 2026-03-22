@@ -11,7 +11,7 @@ const createAdmin = async () => {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("Connected to MongoDB...");
 
-    const username = "admin"; // Default admin username
+    const username = "superadmin nayan"; // Default admin username
     const password = Math.random().toString(36).slice(-10); // Random password
 
     const existingAdmin = await User.findOne({ role: "admin" });

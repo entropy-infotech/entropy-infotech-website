@@ -35,11 +35,11 @@ import { CareerService } from '../../../services/career.service';
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div class="space-y-3">
                     <label class="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
-                    <input formControlName="fullName" type="text" placeholder="John Doe" class="w-full px-8 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:border-slate-900 focus:ring-4 focus:ring-slate-900/5 transition-all font-bold text-slate-700 outline-none">
+                    <input formControlName="fullName" type="text" placeholder="Your Name" class="w-full px-8 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:border-slate-900 focus:ring-4 focus:ring-slate-900/5 transition-all font-bold text-slate-700 outline-none">
                   </div>
                   <div class="space-y-3">
                     <label class="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
-                    <input formControlName="email" type="email" placeholder="john@example.com" class="w-full px-8 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:border-slate-900 focus:ring-4 focus:ring-slate-900/5 transition-all font-bold text-slate-700 outline-none">
+                    <input formControlName="email" type="email" placeholder="Your Email" class="w-full px-8 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:border-slate-900 focus:ring-4 focus:ring-slate-900/5 transition-all font-bold text-slate-700 outline-none">
                   </div>
                 </div>
 
@@ -51,7 +51,7 @@ import { CareerService } from '../../../services/career.service';
                   </div>
                   <div class="space-y-3">
                     <label class="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">City / Country</label>
-                    <input formControlName="cityCountry" type="text" placeholder="New York, USA" class="w-full px-8 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:border-slate-900 focus:ring-4 focus:ring-slate-900/5 transition-all font-bold text-slate-700 outline-none" [class.border-red-500]="applyForm.get('cityCountry')?.touched && applyForm.get('cityCountry')?.invalid">
+                    <input formControlName="cityCountry" type="text" placeholder="Your City , Your Country" class="w-full px-8 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:border-slate-900 focus:ring-4 focus:ring-slate-900/5 transition-all font-bold text-slate-700 outline-none" [class.border-red-500]="applyForm.get('cityCountry')?.touched && applyForm.get('cityCountry')?.invalid">
                   </div>
                 </div>
 

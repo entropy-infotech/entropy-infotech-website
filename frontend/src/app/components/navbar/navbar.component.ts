@@ -99,56 +99,37 @@ import { CommonModule } from '@angular/common';
                     !studentAuthService.isLoggedIn()
                   "
                 >
-                  <div
-                    class="px-5 py-3 border-b border-slate-50 mb-2 text-slate-900"
-                  >
-                    <p class="text-sm font-bold">Welcome Guest</p>
-                    <p
-                      class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mt-0.5"
-                    >
+                  <div class="px-5 py-3 border-b border-slate-50 mb-2 bg-slate-50/50">
+                    <p class="text-sm font-bold text-slate-900">Welcome Back!</p>
+                    <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mt-0.5">
                       Please sign in
                     </p>
                   </div>
-                  <a
-                    routerLink="/login"
-                    class="flex items-center gap-3 px-5 py-2.5 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                      />
-                    </svg>
+                  
+                  <a routerLink="/login" class="flex items-center gap-3 px-5 py-2.5 text-sm text-slate-600 hover:bg-purple-50 hover:text-purple-600 transition-colors font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/></svg>
                     Student Login
                   </a>
-                  <a
-                    routerLink="/admin-login"
-                    class="flex items-center gap-3 px-5 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium text-xs opacity-70"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                      />
-                    </svg>
-                    Admin Access
+
+                  <a routerLink="/admin-login" class="flex items-center gap-3 px-5 py-2.5 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    Client Login
                   </a>
+                  
+                  <a routerLink="/admin-login" class="flex items-center gap-3 px-5 py-2.5 text-sm text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    Admin Login
+                  </a>
+
+                  <div class="border-t border-slate-50 mt-2 pt-2">
+                    <div class="px-5 py-2 mb-1">
+                      <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mb-2">Visiting First Time?</p>
+                      <a routerLink="/contact" class="flex items-center justify-center gap-2 w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-lg transition-colors">
+                        Send a Query
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                      </a>
+                    </div>
+                  </div>
                 </ng-container>
 
                 <!-- Admin/Client View -->

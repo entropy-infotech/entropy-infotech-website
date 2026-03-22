@@ -72,7 +72,12 @@ router.post('/seed', async (req, res) => {
       { name: 'JavaScript', questions: '3.5k', color: 'bg-yellow-500/10 text-yellow-500', difficulty: 'Intermediate', initial: 'JS', studentsActive: '2.8k' },
       { name: 'React', questions: '2.1k', color: 'bg-cyan-500/10 text-cyan-500', difficulty: 'Expert', initial: 'R', studentsActive: '1.5k' },
       { name: 'Node.js', questions: '1.8k', color: 'bg-green-500/10 text-green-500', difficulty: 'Intermediate', initial: 'N', studentsActive: '1.2k' },
-      { name: 'Flutter', questions: '1.4k', color: 'bg-blue-400/10 text-blue-400', difficulty: 'Beginner', initial: 'F', studentsActive: '900' }
+      { name: 'Flutter', questions: '1.4k', color: 'bg-blue-400/10 text-blue-400', difficulty: 'Beginner', initial: 'F', studentsActive: '900' },
+      { name: 'C++', questions: '4.2k', color: 'bg-indigo-500/10 text-indigo-500', difficulty: 'Master', initial: 'C+', studentsActive: '3.1k' },
+      { name: 'Java', questions: '5.1k', color: 'bg-red-500/10 text-red-500', difficulty: 'Advanced', initial: 'J', studentsActive: '4.5k' },
+      { name: 'Data Structures', questions: '6.8k', color: 'bg-purple-500/10 text-purple-500', difficulty: 'Legend', initial: 'DS', studentsActive: '5.2k' },
+      { name: 'Git', questions: '2.5k', color: 'bg-orange-500/10 text-orange-500', difficulty: 'Beginner', initial: 'G', studentsActive: '2.0k' },
+      { name: 'Machine Learning', questions: '3.9k', color: 'bg-teal-500/10 text-teal-500', difficulty: 'Expert', initial: 'ML', studentsActive: '2.7k' }
     ]);
 
     await Activity.insertMany([
